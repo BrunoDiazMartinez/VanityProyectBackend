@@ -1,8 +1,8 @@
 export async function updateTela(id, data) {
-  const { CantTela, FPedTela, observations, status, stage } = data;
+  const { CantTela, FPedTela, observations, status, stage, comentarios } = data;
   const [result] = await db.query(
-    `UPDATE Tela SET CantTela = ?, FPedTela = ?, observations = ?, status = ?, stage = ? WHERE id = ?`,
-    [CantTela, FPedTela, observations, status, stage, id]
+    `UPDATE Tela SET CantTela = ?, FPedTela = ?, observations = ?, status = ?, stage = ?, comentarios = ? WHERE id = ?`,
+    [CantTela, FPedTela, observations, status, stage, comentarios, id]
   );
   return result;
 }
@@ -20,7 +20,7 @@ export async function getOrdenesTela() {
 
 export async function getDetalleTela(id) {
   const [rows] = await db.query(
-    `SELECT t.CantTela, t.FPedTela, t.observations, t.status, t.stage, t.create_time,
+    `SELECT t.CantTela, t.FPedTela, t.observations, t.status, t.stage, t.create_time, t.comentarios,
             o.NumOrd, o.Estilo, o.EstiloCrt
      FROM Tela t
      JOIN ordenes o ON t.id = o.NumOrd
