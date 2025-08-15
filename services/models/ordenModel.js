@@ -46,6 +46,11 @@ export async function createOrden(data) {
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [Estilo, estiloCrt, Linea, Prenda, PrenClr, PrenTalla, CoOrd, CantEst, FPlanIni, FPlanFin, ReEst, OrdDesc]
   );
+  const NumOrd = result.insertId;
+  await db.query(
+    `INSERT INTO Tela (id, name) VALUES (?, ?)`,
+    [NumOrd, Prenda]
+  );
   return result;
 }
 
